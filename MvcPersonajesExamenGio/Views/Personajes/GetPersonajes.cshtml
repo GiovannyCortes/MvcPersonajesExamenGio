@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MvcPersonajesExamenGio.Models.Personaje>
+
+@{
+    ViewData["Title"] = "GetPersonajes";
+}
+
+<h1>Listado de Personajes</h1>
+
+<a asp-controller="Personajes" asp-action="CreatePersonaje" class="btn btn-success my-2">
+    Create New
+</a>
+
+<table class="table table-dark table-bordered">
+    <thead>
+        <tr>
+            <th>IdPersonaje</th>
+            <th>Nombre</th>
+            <th>Imagen</th>
+            <th>IdSerie</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>@item.IdPersonaje</td>
+            <td>@item.Nombre</td>
+            <td>
+                <img src="@item.Imagen"  width="300" />
+            </td>
+            <td>@item.IdSerie</td>
+            <td>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; grid-gap: 10px;">
+                    <a asp-controller="Personajes" asp-action="DetailsPersonaje" asp-route-idPersonaje="@item.IdPersonaje" class="btn btn-primary">Detalles</a>
+                    <a asp-controller="Personajes" asp-action="UpdatePersonaje" asp-route-idPersonaje="@item.IdPersonaje" class="btn btn-warning">Modificar</a>
+                    <a asp-controller="Personajes" asp-action="DeletePersonaje" asp-route-idPersonaje="@item.IdPersonaje" class="btn btn-danger">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
